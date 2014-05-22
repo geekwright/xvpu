@@ -1,0 +1,31 @@
+<h4>Description</h4>
+<p>
+    XOOPS Visual PHPUnit is a developer tool to make unit testing easier.
+</p>
+<p>
+    XOOPS includes a suite of unit tests, using PHPUnit, that cover the core distribution. As the core changes, unit tests need to be run to make sure the changes did not break expected functionality. Also, new methods and classes require new tests be developed. While unit testing will be automatically run when changes are submitted for inclusion, it is much better to test while making the changes.
+</p>
+<p>
+    The command line nature of PHPUnit is great for automation. The entire test suite can be run in a single command. When you just want to run tests on a single, or small set of classes, it might not seem so great. Sifting through the shell output to find what you need can be tedious. With Xvpu, you can run the tests from your web browser, and navigate the results inside a GUI environment.
+</p>
+<h4>Installation</h4>
+<p>
+    XOOPS Visual PHPUnit is a deployed as a Composer managed XOOPS module. To manually install it, issue this command from inside the xoops_lib directory:<br /><br />
+    <code>composer require "geekwright/xvpu" "~1.0"</code><br/><br />
+    Then install the Xvpu module from the system administration area. All additional requirements are handled as composer dependencies.
+</p>
+<h4>Configuration</h4>
+<p>
+    In module preferences, specify the path to the unit test directory. This will default to a location consistent with working inside a XOOPS/XoopsCore fork, and will guess at the location of the UnitTestXoops directory. If this is not correct, specify the desired default directory.
+</p>
+<p>
+    If your system is used by others that you do not want to be able to use Xvpu, be sure to check the module permissions granted to each group. Use of Xvpu in a production environment is NOT recommended.
+</p>
+<h4>Credits</h4>
+<p>
+    <strong>NIH!</strong> (Not Invented Here!)<br /><br />
+    This work is based on the 1.5.6 release of VisualPHPUnit. For details, see:<br />
+    <a href="https://github.com/NSinopoli/VisualPHPUnit/tree/v1.5.6">https://github.com/NSinopoli/VisualPHPUnit/tree/v1.5.6</a> <br /><br />
+    Last, but far from least, the powerplant that makes it all possible is PHPUnit:<br />
+    <a href="https://github.com/sebastianbergmann/phpunit/">https://github.com/sebastianbergmann/phpunit/</a> <br />
+</p>

@@ -1,0 +1,4 @@
+v1.0.0
+=================================
+- Original release
+- Based on github.com/NSinopoli/VisualPHPUnit

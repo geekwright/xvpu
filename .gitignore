@@ -1,0 +1,8 @@
+# no backup files, editor temp
+*~
+\#*
+*.bak
+# no generated files
+app/configpaths.php
+# no archive files
+app/history/*.html
