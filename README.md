@@ -5,5 +5,5 @@ Xvpu - XOOPS Visual PHPUnit - is a XOOPS 2.6.0 module based on [NSinopoli/Visual
 
 To install using composer:
 
-  composer require "geekwright/xvpu" "~1.0"
+    composer require "geekwright/xvpu" "~1.0"
 
