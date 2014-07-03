@@ -45,9 +45,6 @@ define("BASE_INSTALL", realpath(__DIR__));
 
 //set_include_path(get_include_path().PATH_SEPARATOR.PEAR_PATH.PATH_SEPARATOR);
 
-// The directory where the tests reside
-// define('TEST_DIRECTORY', '/home/richard/sites/XoopsCore/UnitTestXoops');
-
 /*
  * Optional settings
  */
@@ -93,4 +90,4 @@ define('IS_PHPUNIT', true);
 // these are set in configpaths.php as they are specific to the XOOPS enviroment
 //define('TEST_DIRECTORY', '.../UnitTestXoops');
 //define('AUTOLOADER_PATH', '.../vendor/autoload.php');
-require dirname(__FILE__) . '/configpaths.php';
+require __DIR__ . '/configpaths.php';

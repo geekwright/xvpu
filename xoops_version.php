@@ -16,8 +16,8 @@
  * @version         $Id: xoops_version.php 8065 2011-11-06 02:02:32Z beckmi $
  */
 
-$modversion['dirname'] = basename(dirname(__FILE__));
-$modversion['name'] = ucfirst(basename(dirname(__FILE__)));
+$modversion['dirname'] = basename(__DIR__);
+$modversion['name'] = ucfirst(basename(__DIR__));
 $modversion['version'] = '1.0';
 $modversion['description'] = 'XOOPS VisualPHPUnit';
 $modversion['author'] = "geekwright";

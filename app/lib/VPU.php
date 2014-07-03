@@ -36,7 +36,7 @@
  */
 
 require_once AUTOLOADER_PATH;
-require_once dirname(__FILE__) . '/ArrayLog.php';
+require_once __DIR__ . '/ArrayLog.php';
 
 class VPU {
 

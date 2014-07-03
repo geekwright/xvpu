@@ -18,12 +18,12 @@
 use Xmf\Request;
 use Xmf\Module\Session;
 
-include dirname(dirname(dirname(__FILE__))) . '/mainfile.php';
+include dirname(dirname(__DIR__)) . '/mainfile.php';
 
 $xoops = \Xoops::getInstance();
 $xoops->header();
 
-$dir = basename(dirname(__FILE__));
+$dir = basename(__DIR__);
 $helper = $xoops->getModuleHelper($dir);
 
 $config_test_dir = $helper->getConfig('test_dir');
@@ -77,12 +77,12 @@ $xoops->footer();
 function launchApp($test_dir)
 {
     $xoops = \Xoops::getInstance();
-    $dir = basename(dirname(__FILE__));
+    $dir = basename(__DIR__);
     $configValue =
         "<?php\n"
         . "define('TEST_DIRECTORY', '" . $test_dir . "');\n"
         . "define('AUTOLOADER_PATH', '" . XOOPS_PATH . "/vendor/autoload.php');\n";
-    $configFile = dirname(__FILE__) . '/app/configpaths.php';
+    $configFile = __DIR__ . '/app/configpaths.php';
     file_put_contents($configFile, $configValue);
     header('Location: ' . $xoops->url('modules/'.$dir.'/app/'));
     exit;
