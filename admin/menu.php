@@ -10,29 +10,21 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @version         $Id: menu.php 8065 2011-11-06 02:02:32Z beckmi $
+ * @copyright 2014 The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license   GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author    Richard Griffith <richard@geekwright.com>
  */
-
-defined('XOOPS_ROOT_PATH') or die("XOOPS root path not defined");
-
-// get path to icons
-$pathIcon32='';
-if (class_exists('Xmf\Module\Admin', true)) {
-    $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
-}
 
 $adminmenu=array();
 // Index
 $adminmenu[] = array(
     'title' => _MI_XVPU_ADMENU1 ,
     'link'  => 'admin/index.php' ,
-    'icon'  => $pathIcon32.'home.png'
+    'icon'  => 'home.png'
 ) ;
 // About
 $adminmenu[] = array(
     'title' => _MI_XVPU_ADMENU2 ,
     'link'  => 'admin/about.php' ,
-    'icon'  => $pathIcon32.'about.png'
+    'icon'  => 'about.png'
 ) ;

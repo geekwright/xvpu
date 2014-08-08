@@ -10,9 +10,9 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
- * @author          Richard Griffith <richard@geekwright.com>
+ * @copyright  2014 The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author     Richard Griffith <richard@geekwright.com>
  */
 
 use Xmf\Request;
@@ -57,9 +57,9 @@ if ('POST'==Request::getMethod()) {
     launchApp($test_dir);
 }
 
-$form = new \XoopsThemeForm('', 'form', '', 'POST');
-$form->addElement(new \XoopsFormText('Unit Test Directory', 'test_dir', 5, 512, $test_dir));
-$form->addElement(new \XoopsFormButton('', 'submit', 'Launch', 'submit'));
+$form = new \Xoops\Form\ThemeForm('', 'form', '', 'POST');
+$form->addElement(new \Xoops\Form\Text('Unit Test Directory', 'test_dir', 5, 512, $test_dir));
+$form->addElement(new \Xoops\Form\Button('', 'submit', 'Launch', 'submit'));
 
 echo $form->render();
 
