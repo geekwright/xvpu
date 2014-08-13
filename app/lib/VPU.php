@@ -733,7 +733,9 @@ if($suite_name!='MY_UnitTestCase') {
             if ( $this->_classname_only($test) == 'PHPUnit_Framework_TestCase' ) {
                 continue;
             }
-            if ( stripos($this->_classname_only($test), 'test') !== false ) {
+            //  if ( stripos($this->_classname_only($test), 'test') !== false ) {
+            // match phpunit automatic XML Test Suite -- only *Test classes
+            if ( substr($this->_classname_only($test), -4) == 'Test' ) {
                 $suite->addTestSuite($test);
             }
         }
