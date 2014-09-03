@@ -1,6 +1,6 @@
 <?php
 
-class PUTest2 extends PHPUnit_Framework_TestCase {    
+class PU2Test extends PHPUnit_Framework_TestCase {
     public function test_this() {
         $key = 'test';
         $value = 'test';

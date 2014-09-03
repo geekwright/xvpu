@@ -750,9 +750,10 @@ if($suite_name!='MY_UnitTestCase') {
         ob_start();
         ini_set('html_errors', 0);
         $suite->run($result);
-        $results = ob_get_contents();
+        //$results = ob_get_contents();
+        $results = ob_get_clean();
         ini_set('html_errors', $html_errors);
-        ob_end_clean();
+        //ob_end_clean();
 $results = $listener->getResults();
 //var_dump($results);
 //$results=json_decode($results);
