@@ -15,7 +15,7 @@
  * @author     Richard Griffith <richard@geekwright.com>
  */
 
-use Xmf\Request;
+use Xoops\Core\Request;
 use Xmf\Module\Session;
 
 include dirname(dirname(__DIR__)) . '/mainfile.php';

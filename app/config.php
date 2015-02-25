@@ -88,6 +88,6 @@ foreach ($bootstraps as $bootstrap) {
 define('IS_PHPUNIT', true);
 
 // these are set in configpaths.php as they are specific to the XOOPS enviroment
-//define('TEST_DIRECTORY', '.../UnitTestXoops');
+//define('TEST_DIRECTORY', '.../tests');
 //define('AUTOLOADER_PATH', '.../vendor/autoload.php');
 require __DIR__ . '/configpaths.php';

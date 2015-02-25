@@ -53,7 +53,7 @@ $modversion['config'][] = array(
     'description' => '_MI_XVPU_TEST_DIR_DESC',
     'formtype' => 'textbox',
     'valuetype' => 'text',
-    'default' => dirname(XOOPS_ROOT_PATH) . '/UnitTestXoops',
+    'default' => dirname(XOOPS_ROOT_PATH) . '/tests',
 );
 
 // About stuff
