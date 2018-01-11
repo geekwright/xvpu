@@ -1,10 +1,10 @@
 <?php
- 
-class IncompleteTest extends PHPUnit_Framework_TestCase {
+
+class IncompleteTest extends \PHPUnit\Framework\TestCase {
     public function test_something() {
         // Optional: Test anything here, if you want.
         $this->assertTrue(TRUE, 'This should already work.');
- 
+
         // Stop here and mark this test as incomplete.
         $this->markTestIncomplete('This test has not been implemented yet.');
     }

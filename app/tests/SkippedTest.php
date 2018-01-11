@@ -1,6 +1,6 @@
 <?php
- 
-class SkippedTest extends PHPUnit_Framework_TestCase {
+
+class SkippedTest extends \PHPUnit\Framework\TestCase {
     protected function setUp() {
         if (!extension_loaded('something_bogus')) {
             $this->markTestSkipped('The something_bogus extension is not available.');
