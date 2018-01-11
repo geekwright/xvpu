@@ -54,7 +54,7 @@
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 3.0.0
  */
-class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestListener
+class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestListener
 {
     /**
      * @var    array
@@ -80,16 +80,16 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * An error occurred.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param  \PHPUnit\Framework\Test $test
      * @param  Exception              $e
      * @param  float                  $time
      */
-    public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addError(\PHPUnit\Framework\Test $test, Exception $e, $time)
     {
         $this->writeCase(
           'error',
           $time,
-          PHPUnit_Util_Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
           $e->getMessage(),
           $test
         );
@@ -100,16 +100,16 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * A failure occurred.
      *
-     * @param  PHPUnit_Framework_Test                 $test
-     * @param  PHPUnit_Framework_AssertionFailedError $e
+     * @param  \PHPUnit\Framework\Test                 $test
+     * @param  \PHPUnit\Framework\AssertionFailedError $e
      * @param  float                                  $time
      */
-    public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
+    public function addFailure(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\AssertionFailedError $e, $time)
     {
         $this->writeCase(
           'fail',
           $time,
-          PHPUnit_Util_Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
           $e->getMessage(),
           $test
         );
@@ -120,16 +120,16 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * Incomplete test.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param  \PHPUnit\Framework\Test $test
      * @param  Exception              $e
      * @param  float                  $time
      */
-    public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addIncompleteTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
     {
         $this->writeCase(
           'error',
           $time,
-          PHPUnit_Util_Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
           'Incomplete Test: ' . $e->getMessage(),
           $test
         );
@@ -140,16 +140,16 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * Skipped test.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param  \PHPUnit\Framework\Test $test
      * @param  Exception              $e
      * @param  float                  $time
      */
-    public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addSkippedTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
     {
         $this->writeCase(
           'error',
           $time,
-          PHPUnit_Util_Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
           'Skipped Test: ' . $e->getMessage(),
           $test
         );
@@ -160,17 +160,17 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * Risky test.
      *
-     * @param PHPUnit_Framework_Test $test
+     * @param \PHPUnit\Framework\Test $test
      * @param Exception              $e
      * @param float                  $time
      * @since  Method available since Release 4.0.0
      */
-    public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+    public function addRiskyTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
     {
         $this->writeCase(
           'error',
           $time,
-          PHPUnit_Util_Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
           'Risky Test: ' . $e->getMessage(),
           $test
         );
@@ -179,11 +179,31 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     }
 
     /**
+     * An warning is issued
+     *
+     * @param  \PHPUnit\Framework\Test $test
+     * @param  Exception              $e
+     * @param  float                  $time
+     */
+    public function addWarning(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\Warning $e, $time)
+    {
+        $this->writeCase(
+            'warning',
+            $time,
+            \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
+            $e->getMessage(),
+            $test
+        );
+
+        $this->currentTestPass = FALSE;
+    }
+
+    /**
      * A testsuite started.
      *
-     * @param  PHPUnit_Framework_TestSuite $suite
+     * @param  \PHPUnit\Framework\TestSuite $suite
      */
-    public function startTestSuite(PHPUnit_Framework_TestSuite $suite)
+    public function startTestSuite(\PHPUnit\Framework\TestSuite $suite)
     {
         $this->currentTestSuiteName = $suite->getName();
         $this->currentTestName      = '';
@@ -200,9 +220,9 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * A testsuite ended.
      *
-     * @param  PHPUnit_Framework_TestSuite $suite
+     * @param  \PHPUnit\Framework\TestSuite $suite
      */
-    public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
+    public function endTestSuite(\PHPUnit\Framework\TestSuite $suite)
     {
         $this->currentTestSuiteName = '';
         $this->currentTestName      = '';
@@ -211,11 +231,11 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * A test started.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param  \PHPUnit\Framework\Test $test
      */
-    public function startTest(PHPUnit_Framework_Test $test)
+    public function startTest(\PHPUnit\Framework\Test $test)
     {
-        $this->currentTestName = PHPUnit_Util_Test::describe($test);
+        $this->currentTestName = \PHPUnit\Util\Test::describe($test);
         $this->currentTestPass = TRUE;
 
         $this->write(
@@ -230,10 +250,10 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     /**
      * A test ended.
      *
-     * @param  PHPUnit_Framework_Test $test
+     * @param  \PHPUnit\Framework\Test $test
      * @param  float                  $time
      */
-    public function endTest(PHPUnit_Framework_Test $test, $time)
+    public function endTest(\PHPUnit\Framework\Test $test, $time)
     {
         if ($this->currentTestPass) {
             $this->writeCase('pass', $time, array(), '', $test);
@@ -260,7 +280,8 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
             'status'  => $status,
             'time'    => $time,
             'trace'   => $trace,
-            'message' => PHPUnit_Util_String::convertToUtf8($message),
+//            'message' => \PHPUnit\Util\Utf8::convertToUtf8($message),
+            'message' => $message,
             'output'  => $output,
           )
         );
@@ -273,7 +294,8 @@ class ArrayLog extends PHPUnit_Util_Printer implements PHPUnit_Framework_TestLis
     {
         array_walk_recursive($buffer, function(&$input) {
             if (is_string($input)) {
-                $input = PHPUnit_Util_String::convertToUtf8($input);
+//                $input = \PHPUnit\Util\Utf8::convertToUtf8($input);
+                $input = $input;
             }
         });
 

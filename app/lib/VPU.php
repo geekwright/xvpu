@@ -719,7 +719,7 @@ if($suite_name!='MY_UnitTestCase') {
     *  @return string
     */
     public function run($tests) {
-        $suite = new PHPUnit_Framework_TestSuite();
+        $suite = new \PHPUnit\Framework\TestSuite();
         $suite->setBackupGlobals(false);
 
         $tests = $this->_parse_tests($tests);
@@ -730,7 +730,7 @@ if($suite_name!='MY_UnitTestCase') {
         $new_classes = get_declared_classes();
         $tests = array_diff($new_classes, $original_classes);
         foreach ( $tests as $test ) {
-            if ( $this->_classname_only($test) == 'PHPUnit_Framework_TestCase' ) {
+            if ( $this->_classname_only($test) == '\PHPUnit\Framework\TestCase' ) {
                 continue;
             }
             //  if ( stripos($this->_classname_only($test), 'test') !== false ) {
@@ -740,7 +740,7 @@ if($suite_name!='MY_UnitTestCase') {
             }
         }
 
-        $result = new PHPUnit_Framework_TestResult;
+        $result = new \PHPUnit\Framework\TestResult;
         $listener = new ArrayLog;
         $result->addListener($listener);
 
