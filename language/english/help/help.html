@@ -11,12 +11,15 @@
 <h4>Installation</h4>
 <p>
     XOOPS Visual PHPUnit is a deployed as a Composer managed XOOPS module. To manually install it, issue this command from inside the xoops_lib directory:<br /><br />
-    <code>composer require "geekwright/xvpu" "~1.0"</code><br/><br />
+    <code>composer require "geekwright/xvpu"</code><br/><br />
     Then install the Xvpu module from the system administration area. All additional requirements are handled as composer dependencies.
 </p>
 <h4>Configuration</h4>
 <p>
-    In module preferences, specify the path to the unit test directory. This will default to a location consistent with working inside a XOOPS/XoopsCore fork, and will guess at the location of the <em>tests</em> directory. If this is not correct, specify the desired default directory.
+    In module preferences, specify the path to the unit test directory, and the path to the bootstrap script to be run before tests are run.
+    The test directory will default to a location consistent with working inside a XOOPS/XoopsCore fork, and will guess at the location of the <em>tests</em> directory.
+    Likewise, the bootstrap file will default to the main XOOPS autoloader, <em>xoops_lib/vendor/autoload.php</em>
+    If these defaults are not correct, specify your desired defaults.
 </p>
 <p>
     If your system is used by others that you do not want to be able to use Xvpu, be sure to check the module permissions granted to each group. Use of Xvpu in a production environment is NOT recommended.
@@ -27,5 +30,5 @@
     This work is based on the 1.5.6 release of VisualPHPUnit. For details, see:<br />
     <a href="https://github.com/NSinopoli/VisualPHPUnit/tree/v1.5.6">https://github.com/NSinopoli/VisualPHPUnit/tree/v1.5.6</a> <br /><br />
     Last, but far from least, the powerplant that makes it all possible is PHPUnit:<br />
-    <a href="https://github.com/sebastianbergmann/phpunit/">https://github.com/sebastianbergmann/phpunit/</a> <br />
+    <a href="https://phpunit.de/">https://phpunit.de/</a> <br />
 </p>

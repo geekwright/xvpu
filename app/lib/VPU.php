@@ -34,8 +34,9 @@
  * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-require_once AUTOLOADER_PATH;
+if (defined('AUTOLOADER_PATH') && !empty(AUTOLOADER_PATH)) {
+    require_once AUTOLOADER_PATH;
+}
 require_once __DIR__ . '/ArrayLog.php';
 
 class VPU {
@@ -215,6 +216,8 @@ class VPU {
         }
 
         ob_start();
+        //$test['name'] = implode(':', $test['name']);
+        //print_r($test);
         include 'ui/test.html';
         $test_content = ob_get_contents();
         ob_end_clean();
@@ -450,7 +453,7 @@ if($suite_name!='MY_UnitTestCase') {
         if ( !$trace ) {
             return '';
         }
-
+    /*
         $new_trace = array();
         foreach ( $trace as $arr ) {
             $found = false;
@@ -474,7 +477,7 @@ if($suite_name!='MY_UnitTestCase') {
         } else {
             $trace = '';
         }
-
+    */
         return $trace;
     }
 

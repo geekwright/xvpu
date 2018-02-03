@@ -10,14 +10,14 @@
  */
 
 /**
- * @copyright 2014 XOOPS Project (http://xoops.org)
+ * @copyright 2014-2018 XOOPS Project (http://xoops.org)
  * @license   GNU GPL 2 or later (http://www.gnu.org/licenses//gpl-2.0.html)
- * @author    trabis <lusopoemas@gmail.com>
+ * @author    geekwright <richard@geekwright.com>
  */
 
 $modversion['dirname'] = basename(__DIR__);
 $modversion['name'] = ucfirst(basename(__DIR__));
-$modversion['version'] = '1.0';
+$modversion['version'] = '2.0';
 $modversion['description'] = 'XOOPS VisualPHPUnit';
 $modversion['author'] = "geekwright";
 $modversion['credits'] = "github.com/NSinopoli/VisualPHPUnit";
@@ -56,10 +56,19 @@ $modversion['config'][] = array(
     'default' => dirname(XOOPS_ROOT_PATH) . '/tests/unit',
 );
 
+$modversion['config'][] = array(
+    'name' => 'test_bootstrap',
+    'title' => '_MI_XVPU_TEST_BOOTSTRAP',
+    'description' => '_MI_XVPU_TEST_BOOTSTRAP_DESC',
+    'formtype' => 'textbox',
+    'valuetype' => 'text',
+    'default' => XOOPS_PATH . '/vendor/autoload.php',
+);
+
 // About stuff
-$modversion['module_status'] = "Alpha";
-$modversion['status'] = "Alpha";
-$modversion['release_date'] = '05/23/2014';
+$modversion['module_status'] = "Beta";
+$modversion['status'] = "Beta";
+$modversion['release_date'] = '02/03/2018';
 
 $modversion['developer_lead'] = "geekwright";
 $modversion['developer_website_url'] = "http://xoops.org";
@@ -69,4 +78,4 @@ $modversion['developer_email'] = "richard@geekwright.com";
 //$modversion['people']['developers'][] = "geekwright";
 
 $modversion['min_xoops'] = "2.6.0";
-$modversion['min_php'] = "5.3";
+$modversion['min_php'] = "7.1";

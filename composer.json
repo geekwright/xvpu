@@ -4,6 +4,7 @@
     "type": "xoops-module",
     "description": "XOOPS Visual PHPunit",
     "require": {
+        "php": ">7.1.0",
         "xoops/module-installer-plugin": "~1.0",
         "phpunit/phpunit": "^6.5|^7.0"
     }

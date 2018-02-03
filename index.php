@@ -27,43 +27,44 @@ $dir = basename(__DIR__);
 $helper = $xoops->getModuleHelper($dir);
 
 $config_test_dir = $helper->getConfig('test_dir');
+$config_test_bootstrap = $helper->getConfig('test_bootstrap');
 
 $test_dir = $config_test_dir;
+$test_bootstrap = $config_test_bootstrap;
 $sessionHelper = new Session();
 if ($sessionHelper) {
-    $var = $sessionHelper->get('test_dir');
-    if ($var) {
-        $test_dir = $var;
+    $test_dir = $sessionHelper->get('test_dir', $test_dir);
+    $test_bootstrap = $sessionHelper->get('test_bootstrap', $test_bootstrap);
+}
+
+// if this is a post operation get our test_dir, save it and redirect to app
+if ('GET'===Request::getMethod()) {
+    $dir=Request::getVar('test_dir', '', $hash = 'GET');
+    $bootstrap=Request::getVar('test_bootstrap', $config_test_bootstrap, $hash = 'GET');
+    if (!empty($dir)) {
+        launchApp($dir, $bootstrap);
     }
 }
 
 // if this is a post operation get our test_dir, save it and redirect to app
-if ('GET'==Request::getMethod()) {
-    $var=Request::getVar('test_dir', '', $hash = 'GET');
-    if (!empty($var)) {
-        launchApp($var);
-    }
-}
-
-// if this is a post operation get our test_dir, save it and redirect to app
-if ('POST'==Request::getMethod()) {
-    $test_dir=Request::getVar('test_dir', '', $hash = 'POST');
-    if (empty($test_dir)) {
-        $test_dir = $config_test_dir;
-    }
+if ('POST'===Request::getMethod()) {
+    $test_dir=Request::getVar('test_dir', $config_test_dir, 'POST');
+    $test_bootstrap = Request::getVar('test_bootstrap', $config_test_bootstrap, 'POST');
     if ($sessionHelper) {
         $sessionHelper->set('test_dir', $test_dir);
+        $sessionHelper->set('test_bootstrap', $test_bootstrap);
     }
-    launchApp($test_dir);
+    launchApp($test_dir, $test_bootstrap);
 }
 
 $form = new \Xoops\Form\ThemeForm('', 'form', '', 'POST');
 $form->addElement(new \Xoops\Form\Text('Unit Test Directory', 'test_dir', 5, 512, $test_dir));
+$form->addElement(new \Xoops\Form\Text('Bootstrap Script', 'test_bootstrap', 5, 512, $test_bootstrap));
 $form->addElement(new \Xoops\Form\Button('', 'submit', 'Launch', 'submit'));
 
 echo $form->render();
 
-echo '<br \><a href="?test_dir=' . $xoops->path('modules/'.$dir.'/app/tests') . '">Examples</a>';
+echo '<br \><a href="?test_dir=' . $xoops->path('modules/'.basename(__DIR__) . '/app/tests') . '">Examples</a>';
 
 $xoops->footer();
 
@@ -74,14 +75,14 @@ $xoops->footer();
  *
  * @return void
  */
-function launchApp($test_dir)
+function launchApp($test_dir, $test_bootstrap)
 {
     $xoops = \Xoops::getInstance();
     $dir = basename(__DIR__);
     $configValue =
         "<?php\n"
         . "define('TEST_DIRECTORY', '" . $test_dir . "');\n"
-        . "define('AUTOLOADER_PATH', '" . XOOPS_PATH . "/vendor/autoload.php');\n";
+        . "define('AUTOLOADER_PATH', '" . $test_bootstrap . "');\n";
     $configFile = __DIR__ . '/app/configpaths.php';
     file_put_contents($configFile, $configValue);
     header('Location: ' . $xoops->url('modules/'.$dir.'/app/'));

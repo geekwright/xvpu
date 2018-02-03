@@ -75,7 +75,7 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @var     boolean
      * @access  private
      */
-    protected $currentTestPass = TRUE;
+    protected $currentTestPass = true;
 
     /**
      * An error occurred.
@@ -84,17 +84,17 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @param  Exception              $e
      * @param  float                  $time
      */
-    public function addError(\PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addError(\PHPUnit\Framework\Test $test, Throwable $t, float $time): void
     {
         $this->writeCase(
           'error',
           $time,
-          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
-          $e->getMessage(),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($t),
+          $t->getMessage(),
           $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
@@ -104,78 +104,78 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @param  \PHPUnit\Framework\AssertionFailedError $e
      * @param  float                                  $time
      */
-    public function addFailure(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\AssertionFailedError $e, $time)
+    public function addFailure(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\AssertionFailedError $e, float $time): void
     {
         $this->writeCase(
           'fail',
           $time,
-          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($e),
           $e->getMessage(),
           $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
      * Incomplete test.
      *
      * @param  \PHPUnit\Framework\Test $test
-     * @param  Exception              $e
-     * @param  float                  $time
+     * @param  Exception               $throwable
+     * @param  float                   $time
      */
-    public function addIncompleteTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addIncompleteTest(\PHPUnit\Framework\Test $test, Throwable $t, float $time): void
     {
         $this->writeCase(
           'error',
           $time,
-          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
-          'Incomplete Test: ' . $e->getMessage(),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($t),
+          'Incomplete Test: ' . $t->getMessage(),
           $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
      * Skipped test.
      *
      * @param  \PHPUnit\Framework\Test $test
-     * @param  Exception              $e
+     * @param  Exception              $t
      * @param  float                  $time
      */
-    public function addSkippedTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addSkippedTest(\PHPUnit\Framework\Test $test, Throwable $t, float $time): void
     {
         $this->writeCase(
           'error',
           $time,
-          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
-          'Skipped Test: ' . $e->getMessage(),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($t),
+          'Skipped Test: ' . $t->getMessage(),
           $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
      * Risky test.
      *
      * @param \PHPUnit\Framework\Test $test
-     * @param Exception              $e
+     * @param Exception              $t
      * @param float                  $time
      * @since  Method available since Release 4.0.0
      */
-    public function addRiskyTest(\PHPUnit\Framework\Test $test, Exception $e, $time)
+    public function addRiskyTest(\PHPUnit\Framework\Test $test, Throwable $t, float $time): void
     {
         $this->writeCase(
           'error',
           $time,
-          \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
-          'Risky Test: ' . $e->getMessage(),
+          \PHPUnit\Util\Filter::getFilteredStacktrace($t),
+          'Risky Test: ' . $t->getMessage(),
           $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
@@ -185,17 +185,17 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @param  Exception              $e
      * @param  float                  $time
      */
-    public function addWarning(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\Warning $e, $time)
+    public function addWarning(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\Warning $e, float $time): void
     {
         $this->writeCase(
             'warning',
             $time,
-            \PHPUnit\Util\Filter::getFilteredStacktrace($e, FALSE),
+            \PHPUnit\Util\Filter::getFilteredStacktrace($e),
             $e->getMessage(),
             $test
         );
 
-        $this->currentTestPass = FALSE;
+        $this->currentTestPass = false;
     }
 
     /**
@@ -203,12 +203,12 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      *
      * @param  \PHPUnit\Framework\TestSuite $suite
      */
-    public function startTestSuite(\PHPUnit\Framework\TestSuite $suite)
+    public function startTestSuite(\PHPUnit\Framework\TestSuite $suite): void
     {
         $this->currentTestSuiteName = $suite->getName();
         $this->currentTestName      = '';
 
-        $this->write(
+        $this->arrayWrite(
           array(
             'event' => 'suiteStart',
             'suite' => $this->currentTestSuiteName,
@@ -222,7 +222,7 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      *
      * @param  \PHPUnit\Framework\TestSuite $suite
      */
-    public function endTestSuite(\PHPUnit\Framework\TestSuite $suite)
+    public function endTestSuite(\PHPUnit\Framework\TestSuite $suite): void
     {
         $this->currentTestSuiteName = '';
         $this->currentTestName      = '';
@@ -233,12 +233,12 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      *
      * @param  \PHPUnit\Framework\Test $test
      */
-    public function startTest(\PHPUnit\Framework\Test $test)
+    public function startTest(\PHPUnit\Framework\Test $test): void
     {
         $this->currentTestName = \PHPUnit\Util\Test::describe($test);
-        $this->currentTestPass = TRUE;
+        $this->currentTestPass = true;
 
-        $this->write(
+        $this->arrayWrite(
           array(
             'event' => 'testStart',
             'suite' => $this->currentTestSuiteName,
@@ -253,10 +253,10 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @param  \PHPUnit\Framework\Test $test
      * @param  float                  $time
      */
-    public function endTest(\PHPUnit\Framework\Test $test, $time)
+    public function endTest(\PHPUnit\Framework\Test $test, float $time): void
     {
         if ($this->currentTestPass) {
-            $this->writeCase('pass', $time, array(), '', $test);
+            $this->writeCase('pass', $time, '', '', $test);
         }
     }
 
@@ -266,13 +266,13 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
      * @param array  $trace
      * @param string $message
      */
-    protected function writeCase($status, $time, array $trace = array(), $message = '', $test = NULL)
+    protected function writeCase(string $status, float $time, $trace, string $message = '', $test = null)
     {
         $output = '';
-        if ($test !== NULL && $test->hasOutput()) {
+        if ($test !== null && $test->hasOutput()) {
             $output = $test->getActualOutput();
         }
-        $this->write(
+        $this->arrayWrite(
           array(
             'event'   => 'test',
             'suite'   => $this->currentTestSuiteName,
@@ -290,15 +290,8 @@ class ArrayLog extends \PHPUnit\Util\Printer implements \PHPUnit\Framework\TestL
     /**
      * @param string $buffer
      */
-    public function write($buffer)
+    public function arrayWrite(array $buffer): void
     {
-        array_walk_recursive($buffer, function(&$input) {
-            if (is_string($input)) {
-//                $input = \PHPUnit\Util\Utf8::convertToUtf8($input);
-                $input = $input;
-            }
-        });
-
         $this->testOutput[]=$buffer;
     }
 

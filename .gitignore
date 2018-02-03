@@ -2,6 +2,7 @@
 *~
 \#*
 *.bak
+.idea/
 # no generated files
 app/configpaths.php
 # no archive files
