@@ -1,6 +1,6 @@
 {
     "name": "geekwright/xvpu",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "type": "xoops-module",
     "description": "XOOPS Visual PHPunit",
     "require": {
